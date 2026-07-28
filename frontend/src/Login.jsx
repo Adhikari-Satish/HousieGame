@@ -35,13 +35,12 @@ function Login() {
 
     return Object.keys(newErrors).length === 0;
   };
-
+// `http://localhost:5000/login`,
   const handleSubmit = async (e) => {
   e.preventDefault();
 if (!validate()) return;
   try {
     const response = await axios.post(
-      // `http://localhost:5000/login`,
       `https://housiegame-production.up.railway.app/login`,
       form
     );
