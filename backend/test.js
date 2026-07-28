@@ -193,16 +193,13 @@ const transporter = nodemailer.createTransport({
     pass: gmailAppPassword
   }
 });
+
 // const twilio = require("twilio");
 
-// const client = twilio("REMOVED_SECRET", "REMOVED_SECRET");
-
-const twilio = require("twilio");
-
-const client = twilio(
-    process.env.TWILIO_ACCOUNT_SID,
-    process.env.TWILIO_AUTH_TOKEN
-);
+// const client = twilio(
+//     process.env.TWILIO_ACCOUNT_SID,
+//     process.env.TWILIO_AUTH_TOKEN
+// );
 app.post("/send-otp", async (req, res) => {
   try {
     const { login } = req.body;
@@ -261,7 +258,8 @@ app.post("/send-otp", async (req, res) => {
         },
         {
           headers: {
-            authorization: "a2IWsP6L74TKbVtqiYVMCR3RwbphmHBKQEl2YoDELDnjycr1weEFk0v6wi4C",
+            // authorization: "a2IWsP6L74TKbVtqiYVMCR3RwbphmHBKQEl2YoDELDnjycr1weEFk0v6wi4C",
+            authorization: process.env.FAST2SMS_API_KEY,
             "Content-Type": "application/json"
           }
         }
@@ -354,6 +352,11 @@ app.post("/reset-password", async (req, res) => {
 // });
 
 // const PORT = process.env.PORT || 5000;
+app.get("/", (req,res)=>{
+    res.json({
+        message:"Housie Backend Running"
+    });
+});
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

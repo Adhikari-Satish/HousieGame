@@ -34,7 +34,7 @@ const navigate = useNavigate();
   // STEP 2 - VERIFY OTP
   const verifyOtp = async () => {
     try {
-      const res = await axios.post(`https://housiegame-production.up.railway.app/login/verify-otp`, {
+      const res = await axios.post(`https://housiegame-production.up.railway.app/verify-otp`, {
         login,
         otp,
       });
