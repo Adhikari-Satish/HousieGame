@@ -10,7 +10,7 @@ const app = express();
 app.use(cors({
     origin:[
         "http://localhost:5173",
-        "https://housiegame-production.up.railway.app"
+        "https://rare-encouragement-production-bd05.up.railway.app"
     ],
     credentials:true
 }
