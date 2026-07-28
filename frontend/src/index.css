@@ -1,0 +1,314 @@
+
+.register-page , .forgot{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+}
+/* Dark Glass Card */
+.register-card, .login-card, .forgot-card{
+  width: 400px;
+  padding: 35px;
+  border-radius: 20px;
+  background: rgba(20, 20, 20, 0.75);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 0 25px rgba(0, 255, 255, 0.4);
+}
+
+/* Title */
+.register-card h2, .login-card h2, .forgot-card h2 {
+  color: #00ffff;
+  text-align: center;
+  margin-bottom: 25px;
+  letter-spacing: 2px;
+}
+
+/* Input Fields */
+.register-card input, .login-card input, .forgot-card input {
+  width: 100%;
+  padding: 14px;
+  margin-top: 6px;
+  border-radius: 10px;
+  border: 2px solid #444;
+  background: #222;
+  color: white;
+  font-size: 15px;
+  outline: none;
+  transition: 0.3s;
+  box-sizing: border-box;
+}
+.password {
+  width: 100%;
+  position: relative;
+  padding-right: 20px;
+  padding: 14px;
+  margin-top: 6px;
+  border-radius: 10px;
+  border: 2px solid #444;
+  background: #222;
+  color: white;
+  font-size: 15px;
+  outline: none;
+  transition: 0.3s;
+  box-sizing: border-box;
+}
+
+
+.register-card input:focus, .login-card input:focus, .forgot-card input:focus {
+  border-color: #00ffff;
+  box-shadow: 0 0 10px #00ffff;
+}
+
+/* Placeholder */
+.register-card input::placeholder, .login-card input::placeholder, .forgot-card input::placeholder  {
+  color: #bbb;
+}
+
+/* Error */
+.error {
+  color: #ff5a5a;
+  font-size: 13px;
+}
+
+/* Register Button */
+.register-btn, .login-btn, .forgot button{
+  width: 100%;
+  padding: 14px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(90deg, #00c6ff, #0072ff);
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.register-btn:hover, .login-btn:hover, .forgot button:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px #00c6ff;
+}
+
+/* Mobile */
+@media (max-width: 500px) {
+  .register-card {
+    width: 90%;
+    padding: 25px;
+  }
+  .login-card {
+    width: 90%;
+    padding: 25px;
+  }
+  .forgot-card {
+    width: 90%;
+    padding: 25px;
+  }
+}
+
+/* Login css */
+/* Full page background already comes from body */
+
+/* Center login box */
+.login-container {
+  display: flex;
+  margin-top: 80px;
+  justify-content: center;
+  align-items: center;
+}
+
+/* home.css */
+/* .home{
+  flex: 1;
+  display: flex;
+  flex-direction:column;
+  width:100%;
+  gap:5px;
+  color: antiquewhite;
+  justify-self: center; 
+  align-content: center;
+}
+.home1{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+.home2{
+  display: flex;
+  flex-direction: column;
+}
+.home2 button{
+  color: aliceblue;
+  margin-left: 27%;
+  background: #1e00ff;
+  border: 1px;
+  box-shadow: 1px 1px 2px 2px;
+  border-radius: 5px;
+}
+.home2 button:hover{
+  color: aliceblue;
+  background: #0e2dab;
+  border: 1px solid black;
+  box-shadow: 1px 1px 2px 2px rgb(0, 55, 255);
+  border-radius: 5px;
+} */
+/* Gams.css */
+.game{
+    
+    width:92%;
+    /* height:30vh ; */
+    /* max-width:90%; */
+    margin:2%;
+    padding:2%;
+    border-radius:18px;
+    background:rgba(255, 255, 255, 0.108);
+    /* background-size: contain;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat; */
+    backdrop-filter:blur(18px);
+    box-shadow:0 10px 35px rgba(255, 255, 255, 0.41);
+    border:1px solid rgba(0, 0, 0, 0.404);
+    color:white;
+}
+
+.primary-btn{
+    background:#0b7ecad0;
+    color:white;
+    border:none;
+    padding:5px 20px;
+    border-radius:10px;
+    font-size:18px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.primary-btn:hover{
+    background:#005eff;
+    transform:translateY(-2px);
+}
+
+
+.generated-box{
+    padding:3px 10px;
+    border-radius:10px;
+    background:rgba(255,255,255,.08);
+    max-height:130px;
+    overflow:auto;
+    line-height:1.8;
+}
+
+/* Home Page */
+.home{
+    /* min-height: 100vh; */
+    /* display: flex; */
+    justify-content: center;
+    align-items: center;
+    /* background: linear-gradient(135deg,#6a11cb,#2575fc); */
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Container */
+.home1{
+    width: 100%;
+    display: inline-flex;
+    /* float: right; */
+    flex-direction:row;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+/* Heading */
+.home h1{
+    width: 100%;
+    text-align: center;
+    color: white;
+    font-size: 42px;
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+
+/* Card */
+.home2{
+    width: 350px;
+    /* height: 300px; */
+    background: white;
+    border-radius: 18px;
+    padding: 20px;
+    text-decoration: none;
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+    gap: 0px;
+    box-shadow: 0 10px 25px rgba(0,0,0,.2);
+    transition: .3s;
+}
+
+.home2:hover{
+    transform: translateY(-4px);
+    /* background: #0e2dab; */
+    border: 1px solid black;
+    /* box-shadow: 1px 1px 2px 2px rgb(0, 55, 255); */
+    /* border-radius: 5px; */
+    box-shadow: 1px 1px 2px 2px rgba(0,0,0,.3);
+}
+
+/* Images */
+.home2 img{
+    width: 320px;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+/* Buttons */
+.home2 button{
+    width: calc(100% - 30px);
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    /* background: #2575fc; */
+    background: #1e00ff;
+    border: 1px;
+    box-shadow: 1px 1px 2px 2px;
+    color: white;
+    font-size: 17px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.home2 button:hover{
+    background: #1d5fd0;
+}
+
+/* Responsive */
+@media (max-width:768px){
+
+    .home1{
+        flex-direction: column;
+        gap: 25px;
+    }
+
+    .home h1{
+        font-size: 37px;
+        /* font-size: 25px; */
+    }
+
+    .home2{
+        width: 90%;
+        max-width: 320px;
+    }
+
+    .home2 img{
+        width: 100%;
+        height: 200px;
+    }
+}
+/* @media (max-width:600px){
+  .home1 h1{
+        font-size: 10px;
+    }
+} */

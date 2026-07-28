@@ -1,0 +1,92 @@
+*{
+  margin: 0;
+  padding: 0;
+ 
+}
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+  
+  background: linear-gradient(
+    135deg,
+    #1f3465 0%,
+    #344764 35%,
+    #455974 70%,
+    #5d697a 100%
+  );
+
+ 
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+
+.header {
+  background: #1d305e;
+  color: white;
+  height: 55px;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  /* z-index: 10000; */
+  box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+}
+
+.sidebar {
+  position: fixed;   /* ✅ IMPORTANT (not absolute) */
+  top: 55px;
+  left: 0;
+  width: 220px;
+  background: #2b447b;
+  border-radius: 0 0 12px 0;
+  box-shadow: 3px 3px 15px rgba(0,0,0,.3);
+  padding: 15px 0;
+
+  z-index: 9999;   /* ✅ makes it appear above register page */
+}
+/* .sidebar {
+  position: absolute;
+  top: 65px;
+  left: 0;
+  width: 220px;
+  background: #243b6b;
+  border-radius: 0 0 12px 0;
+  box-shadow: 3px 3px 15px rgba(0,0,0,.3);
+  padding: 15px 0;
+} */
+.sidebar a{
+  display: block;
+  color: white;
+  text-decoration: none;
+  padding: 10px 25px;
+  font-size: 17px;
+  transition: .3s;
+}
+
+.sidebar a:hover {
+  background: #536794;
+  padding-left: 28px;
+}
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 60px;
+  background: #1b2d57;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  box-shadow: 0 -2px 10px rgba(0,0,0,.25);
+}
+
+.bottom-nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  transition: .3s;
+}
+
+.bottom-nav a:hover {
+  color: #ffd166;
+}
