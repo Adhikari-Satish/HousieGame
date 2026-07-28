@@ -16,7 +16,7 @@ const navigate = useNavigate();
   // STEP 1 - SEND OTP
   const sendOtp = async () => {
     try {
-      const res = await axios.post(`http://localhost:5000/send-otp`, {
+      const res = await axios.post(`https://housiegame-production.up.railway.app/send-otp`, {
         login,
       });
       
@@ -34,7 +34,7 @@ const navigate = useNavigate();
   // STEP 2 - VERIFY OTP
   const verifyOtp = async () => {
     try {
-      const res = await axios.post(`http://localhost:5000/verify-otp`, {
+      const res = await axios.post(`https://housiegame-production.up.railway.app/login/verify-otp`, {
         login,
         otp,
       });
@@ -53,7 +53,7 @@ const navigate = useNavigate();
         if (newPassword !== confirmPassword) {
             return alert("Passwords do not match");
         }
-      const res = await axios.post(`http://localhost:5000/reset-password`, {
+      const res = await axios.post(`https://housiegame-production.up.railway.app/reset-password`, {
         login,
         newPassword,
         confirmPassword,

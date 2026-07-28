@@ -7,7 +7,15 @@ require("dotenv").config({ path: path.resolve(__dirname, ".env") });
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+    origin:[
+        "http://localhost:5173",
+        "https://housiegame-production.up.railway.app"
+    ],
+    credentials:true
+}
+
+));
 app.use(express.json());
 
 // PostgreSQL connection
