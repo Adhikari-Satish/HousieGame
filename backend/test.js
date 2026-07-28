@@ -341,6 +341,12 @@ app.post("/reset-password", async (req, res) => {
 /* =========================
    SERVER START
 ========================= */
-app.listen(5000, () => {
-  console.log("Server running on port 5000");
+// app.listen(5000, () => {
+//   console.log("Server running on port 5000");
+// });
+
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
