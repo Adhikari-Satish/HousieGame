@@ -35,9 +35,9 @@ const pool = new Pool({
 
   port: process.env.PGPORT,
 
-  ssl:{
+  ssl: process.env.NODE_ENV === "production" ? {
     rejectUnauthorized:false
-  }
+  }: false
 });
 
 pool.connect()
