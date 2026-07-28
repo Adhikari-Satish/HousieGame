@@ -353,7 +353,7 @@ app.post("/reset-password", async (req, res) => {
 
 // const PORT = process.env.PORT || 5000;
 app.get("/", (req,res)=>{
-    res.json({
+    res.status(200).json({
         message:"Housie Backend Running"
     });
 });
