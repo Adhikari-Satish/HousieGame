@@ -185,10 +185,16 @@ const transporter = nodemailer.createTransport({
     pass: gmailAppPassword
   }
 });
+// const twilio = require("twilio");
+
+// const client = twilio("REMOVED_SECRET", "REMOVED_SECRET");
+
 const twilio = require("twilio");
 
-const client = twilio("REMOVED_SECRET", "REMOVED_SECRET");
-
+const client = twilio(
+    process.env.TWILIO_ACCOUNT_SID,
+    process.env.TWILIO_AUTH_TOKEN
+);
 app.post("/send-otp", async (req, res) => {
   try {
     const { login } = req.body;
