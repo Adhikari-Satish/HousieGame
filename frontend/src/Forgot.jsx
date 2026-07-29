@@ -12,22 +12,17 @@ function Forgot() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false)
   const [showPass, setShowPass] = useState(false)
-  // const [errors, setErrors] = useState({});
-  // const [loading,setLoading] = useState(false);
+  const [errors, setErrors] = useState({});
+  const [success, setSuccess] = useState("");
+  const [loading,setLoading] = useState(false);
   const BASE_URL =
   window.location.hostname === "localhost"
     ? "http://localhost:5000"
     : "https://housiegame-61ai.onrender.com";
 
-  // STEP 1 - SEND OTP
-  // const urls = [
-  // `http://localhost:5000/send-otp`,
-  // `https://housiegame-production.up.railway.app/send-otp`
-  // ];
   const sendOtp = async () => {
-    // for (const url of urls) {
-    // setErrors({})
-    // setLoading(true);
+    setErrors({})
+    setLoading(true)
     try {
       const res = await axios.post(`${BASE_URL}/send-otp`,
         // "https://housiegame-production.up.railway.app/send-otp", 
@@ -37,27 +32,23 @@ function Forgot() {
       
       alert(res.data.message);
       setStep(2);
-    //   setEmail(res.data.email); // store email from backend
-    //   alert(res.data.message);
-    //   setStep(2);
+      // setErrors({"OTP sent to your email"}); // store email from backend
     } catch (err) {
-      // alert(err.response.data.message);
-  //     setErrors({
-  //   server: err.response?.data?.message || "Something went wrong"
-  // });
-     alert(err.response?.data?.message || "Error sending OTP");
+    //  alert(err.response?.data?.message || "Error sending OTP");
+    setErrors({
+      server: err.response?.data?.message || "Error sending OTP"
+    });
+    }
+    finally{
+      setLoading(false);
     }
     // }
   };
 
-  // STEP 2 - VERIFY OTP
-  // const urls1 = [
-  // `http://localhost:5000/verify-otp`,
-  // `https://housiegame-production.up.railway.app/verify-otp`
-  // ];
+
   const verifyOtp = async () => {
-    // for (const url of urls1) {
-    // setErrors({})
+    setErrors({});
+    setLoading(true)
     try {
       const res = await axios.post(`${BASE_URL}/verify-otp`,
         // "https://housiegame-production.up.railway.app/verify-otp", 
@@ -69,43 +60,36 @@ function Forgot() {
       alert(res.data.message);
       setStep(3);
     } catch (err) {
-      // alert(err.response.data.message);
-  //     setErrors({
-  //   server: err.response?.data?.message || "Invalid OTP"
-  // });
-
-     alert(err.response?.data?.message || "Invalid OTP");
+      setErrors({
+      server: err.response?.data?.message || "Invalid OTP"
+    });
+    //  alert(err.response?.data?.message || "Invalid OTP");
+    }
+    finally{
+      setLoading(false);
     }
   // }
   };
 
-  // const urls2 = [
-  // `http://localhost:5000/reset-password`,
-  // `https://housiegame-production.up.railway.app/reset-password`
-  // ];
-
-  // STEP 3 - RESET PASSWORD
   const resetPassword = async () => {
-    // setErrors({})
-    // let newErrors = {};
-    // for (const url of urls2) {
+    setErrors({});
+    setSuccess("")
+    setLoading(true)
+    let newErrors = {};
     try {
       // Password pattern validation
     //   if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?#&]).{8,20}$/.test(
-    //     newPassword
-    //   )) 
+    //     newPassword))
     //   {
-    //   newErrors.newPassword=
-    //     "Password must contain uppercase, lowercase, number and special character (8-20 characters)"
+    //     setErrors({server:"Password must contain uppercase, lowercase, number and special character (8-20 characters)"});
+    //     setStep(3);
     // }
 
       if (newPassword !== confirmPassword) {
-        alert("password do not match")
-            
+        // alert("password do not match")
+        setErrors({server:"Passwords do not match"});            
       }
-      // setErrors(newErrors);
-      // Stop API call if validation fails
-      
+
       const res = await axios.post(`${BASE_URL}/reset-password`,
         // "https://housiegame-production.up.railway.app/reset-password",
          {
@@ -113,8 +97,8 @@ function Forgot() {
         newPassword,
         confirmPassword,
       });
-
-      alert(res.data.message);
+      setSuccess(res.data.message);
+      // alert(res.data.message);
       setStep(1);
       setLogin("");
       setEmail("");
@@ -124,22 +108,20 @@ function Forgot() {
       setConfirmPassword("");
       navigate("/");
     } catch (err) {
-      alert(err.response.data.message);
-    //   setErrors({
-    //   server: err.response?.data?.message || "Error resetting password"
-    // });
-
-    //  alert(err.response?.data?.message || "Error resetting password");
+      // alert(err.response.data.message);
+      setErrors({
+      server: err.response?.data?.message || "Error resetting password"
+    });
     }
-  // }
+    finally{
+      setLoading(false);
+    }
   };
 
   return (
     <div className="forgot">
     <div className="forgot-card" style={{ maxWidth: "400px", margin: "40px auto" }}>
       <h2>Forgot Password</h2>
-
-      {/* STEP 1 */}
       {step === 1 && (
         <div>
           <input
@@ -150,12 +132,12 @@ function Forgot() {
             required
           />
           <br /><br />
-          <button onClick={sendOtp}>Send OTP</button>
-          {/* <span className="error"> {errors.server}</span> */}
+          <button onClick={sendOtp} disabled={loading}>
+            {loading ? "Sending OTP..." : "Send OTP"}</button>
+          <p className="error"> {errors.server}</p>
+          <p className="error">{success}</p>
         </div>
       )}
-
-      {/* STEP 2 */}
       {step === 2 && (
         <div>
           <input
@@ -163,17 +145,20 @@ function Forgot() {
             placeholder="Enter OTP"
             value={otp}
             onChange={(e) => setOtp(e.target.value)}
+            style={{position:"relative",zIndex:20}}
             required
           />
           <br /><br />
-          <button onClick={verifyOtp}>Verify OTP</button>
-              {/* <span className="error"> {errors.server}</span> */}
+          <button onClick={verifyOtp} disabled={loading}>
+            {loading ? "Verifing OTP..." : "Verify OTP"}
+          </button>
+              <p className="error"> {errors.server}</p>
+              <p className="error">{success}</p>
         </div>
       )}
-
-      {/* STEP 3 */}
       {step === 3 && (
         <div>
+        <div className="password-box">
           <input
             className="password"
           // type="password"
@@ -181,6 +166,8 @@ function Forgot() {
             placeholder="New Password"
             value={newPassword}
             onChange={(e) => setNewPassword(e.target.value)}
+            minLength={6}
+            // style={{position:"relative",zIndex:20}}
             required
           />
           <span
@@ -199,16 +186,16 @@ function Forgot() {
     {showPassword ? "🙈" : "👁️"}
   </span>
           <br />
-          {/* <span className="error">{errors.newPassword}</span> */}
+          {/* <p className="error">{errors.newPassword}</p> */}
           <br />
-
-          <input
-            className="password"
+          <input className="password"
           // type="password"
           type={showPass ? "text" : "password"}
             placeholder="Confirm Password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
+            minLength={6}
+            // style={{position:"relative",zIndex:20}}
             required
           />
           <span
@@ -227,16 +214,19 @@ function Forgot() {
     {showPass ? "🙈" : "👁️"}
   </span>
           <br />
-            {/* <span className="error">{errors.confirmPassword}</span> */}
+            {/* <p className="error">{errors.confirmPassword}</p> */}
           <br />
-
-          <button onClick={resetPassword}>Reset Password</button>
-          {/* <span className="error"> {errors.server}</span> */}
+          <button onClick={resetPassword} disabled={loading}>
+            {loading ? "Password Changing..." : "Password Change"}
+          </button>
+          <p className="error"> {errors.server}</p>
+          <p className="error"> {success}</p>
+        </div>
         </div>
       )}
     </div>
+    
     </div>
   );
 }
-
 export default Forgot;

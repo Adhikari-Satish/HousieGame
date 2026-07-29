@@ -12,6 +12,7 @@ function Login() {
   const [showPassword, setShowPassword] = useState(false)
 
   const [errors, setErrors] = useState({});
+  const [success, setSuccess] = useState("");
   const BASE_URL =
   window.location.hostname === "localhost"
     ? "http://localhost:5000"
@@ -36,7 +37,6 @@ function Login() {
     }
 
     setErrors(newErrors);
-
     return Object.keys(newErrors).length === 0;
   };
 // `http://localhost:5000/login`,
@@ -48,8 +48,11 @@ function Login() {
 
   const handleSubmit = async (e) => {
   e.preventDefault();
+ 
   if (!validate()) return;
   // for (const url of urls) {
+   setErrors({});
+   setSuccess("");
   try {
     const response = await axios.post(`${BASE_URL}/login`,
       // `http://localhost:5000/login`,
@@ -57,10 +60,14 @@ function Login() {
       form
     );
     // alert(response.data.message);
-    console.log(response.data.user);
+    setSuccess(response.data.message);
+    // console.log(response.data.user);
     navigate("/");
   } catch (error) {
-    alert(error.response.data.message);
+    // alert(error.response.data.message);
+    setErrors({
+    server: error.response?.data?.message || "Login failed"
+    });
   }
   // }
   };
@@ -117,6 +124,9 @@ function Login() {
         <br /><br />
 
         <button className="login-btn" type="submit">Login</button>
+        <span className="error"> {errors.server}</span>
+        <span className="error"> {success}</span>
+
       </form>
     </div>
     </div>

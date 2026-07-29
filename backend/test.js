@@ -40,7 +40,7 @@ const pool = new Pool({
 
   ssl: process.env.NODE_ENV === "production" ? {
     rejectUnauthorized:false
-  }: false
+  }: false,
 });
 
 pool.connect()
@@ -179,7 +179,7 @@ const nodemailer = require("nodemailer");
 // const resend = new Resend("REMOVED_SECRET");
 let otpStore = {};
 const axios = require("axios");
-const { json } = require("stream/consumers");
+// const { json } = require("stream/consumers");
 const gmailUser = process.env.GMAIL_USER;
 const gmailAppPassword = process.env.GMAIL_APP_PASSWORD;
 
@@ -200,7 +200,6 @@ const transporter = nodemailer.createTransport({
 app.post("/send-otp", async (req, res) => {
   try {
     const { login } = req.body;
-
     const user = await pool.query(
       "SELECT * FROM humans WHERE email=$1 OR phone=$1",
       [login]
@@ -217,9 +216,9 @@ app.post("/send-otp", async (req, res) => {
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
 
     otpStore[login] = {otp,expiresAt: Date.now() + 5 * 60 * 1000};
-
-    console.log("Generated OTP:", otp);
-
+    // console.log("Generated OTP:", otp);
+    // const isEmail = login.includes("@");
+    // if (isEmail) {
     try {
       await transporter.sendMail({
         from: gmailUser,
@@ -232,45 +231,48 @@ app.post("/send-otp", async (req, res) => {
         <h1>${otp}</h1>
         <p>Valid for 5 minutes</p>`
       });
-      console.log("Email OTP sent")
-      // res.json({
-      //   message: "OTP sent to email successfully"
-      // });
-    }
-    catch (mailErr) {
-      console.log("Email Error:", mailErr);
-      return res.status(500).json({
-        message: "Failed to send OTP. Check Gmail App Password."
+      // console.log("Email OTP sent")
+      return res.json({
+        message: "OTP sent to email successfully"
       });
     }
-
-    // SMS otp sending using Fast2SMS
-  try {
-      await axios.post(
-        "https://www.fast2sms.com/dev/bulkV2",
-        {
-          route: "q",
-          message: `Your OTP is ${otp}`,
-          language: "english",
-          numbers: dbUser.phone
-        },
-        {
-          headers: {
-            // authorization: "a2IWsP6L74TKbVtqiYVMCR3RwbphmHBKQEl2YoDELDnjycr1weEFk0v6wi4C",
-            authorization: process.env.FAST2SMS_API_KEY,
-            "Content-Type": "application/json"
-          }
-        }
-      );
-      console.log("SMS OTP sent");
+    catch (mailErr) {
+      // console.log("Email Error:", mailErr.message);
+      return res.status(500).json({
+        message: "Failed to send OTP. Check Gmail."
+      });
     }
-    
-    catch (smsErr) {
-      console.log("SMS failed:", smsErr.message);
-    }
-  res.json({
-  message: "OTP sent successfully"
-  });
+  // else{
+  //   // SMS otp sending using Fast2SMS
+  //   try {
+  //     await axios.post(
+  //       "https://www.fast2sms.com/dev/bulkV2",
+  //       {
+  //         route: "q",
+  //         message: `Your OTP is ${otp}`,
+  //         language: "english",
+  //         numbers: String(dbUser.phone)
+  //       },
+  //       {
+  //         headers: {
+  //           // authorization: "a2IWsP6L74TKbVtqiYVMCR3RwbphmHBKQEl2YoDELDnjycr1weEFk0v6wi4C",
+  //           authorization: process.env.FAST2SMS_API_KEY,
+  //           "Content-Type": "application/json"
+  //         }
+  //       }
+  //     );
+  //     console.log("SMS OTP sent");
+  //     return res.json({
+  //         message:"OTP sent to email successfully"
+  //       });
+  //   }    
+  //   catch (smsErr) {
+  //     console.log("SMS failed:", smsErr.message);
+  //     return res.status(500).json({
+  //         message:"Failed to send SMS OTP"
+  //       });
+  //   }
+  // }
   }
   catch (err) {
     console.log(err);
@@ -278,7 +280,7 @@ app.post("/send-otp", async (req, res) => {
       message: "Server error"
     });
   }
-})
+});
 
 app.post("/verify-otp", (req, res) => {
   const { login, otp } = req.body;

@@ -13,6 +13,7 @@ import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 function App() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [page, setPage] = useState('Home')
+  const closeMenu = () => {setMenuOpen(false);};
 
   return (
     <BrowserRouter className="maii">
@@ -45,19 +46,19 @@ function App() {
           }}
         >
           <p style={{ cursor: 'pointer', position: 'relative' }}>
-            <Link to="/profile">Profile</Link>
+            <Link onClick={closeMenu} to="/profile">Profile</Link>
           </p>
           <p style={{ cursor: 'pointer', position: 'relative' }}>
-            <Link to="/game1">Auto-gen</Link>
+            <Link onClick={closeMenu} to="/game1">Auto-gen</Link>
           </p>
           <p style={{ cursor: 'pointer', position: 'relative'}}>
-            <Link to="/login">Login</Link>
+            <Link onClick={closeMenu} to="/login">Login</Link>
           </p>
           <p style={{ cursor: 'pointer', position: 'relative'}}>
-            <Link to="/register">Register</Link>
+            <Link onClick={closeMenu} to="/register">Register</Link>
           </p>
           <p style={{ cursor: 'pointer', position: 'relative' }}>
-            <Link to="/forgot">Forgot Password</Link>
+            <Link onClick={closeMenu} to="/forgot">Forgot Password</Link>
           </p>
           {/* <p style={{ cursor: 'pointer', position: 'relative'}}>
             <Link to="/game">Game</Link>
@@ -91,12 +92,11 @@ function App() {
         //   // padding: '15px',
         // }}
       >
-        <Link className='a' to="/">Home</Link>
-        <Link to="/profile" >Profile</Link>
+        <Link onClick={closeMenu} className='a' to="/">Home</Link>
+        <Link onClick={closeMenu} to="/profile" >Profile</Link>
         {/* <Link to="/setting" >Setting</Link> */}
-        <Link to="/register" >Register</Link>
-        <Link to="/login">Login</Link>
-        
+        <Link onClick={closeMenu} to="/register" >Register</Link>
+        <Link onClick={closeMenu} to="/login">Login</Link>
       </div>
     </BrowserRouter>
   )
