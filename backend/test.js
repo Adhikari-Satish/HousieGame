@@ -7,7 +7,7 @@ const bcrypt = require("bcrypt");
 // require("dotenv").config({ path: path.resolve(__dirname, ".env") });
 require("dotenv").config();
 
-const PORT = 5000 || process.env.PORT;
+// const PORT = 5000 || process.env.PORT;
 const app = express();
 
 app.use(cors({
@@ -371,7 +371,7 @@ app.get("/health", (req,res)=>{
 // app.listen(5000, () => {
 //   console.log("Server running on port 5000");
 // });
-console.log("PORT FROM RAILWAY:", process.env.PORT);
+const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`Server running on port ${PORT}`);
