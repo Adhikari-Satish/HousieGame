@@ -3,8 +3,10 @@ const cors = require("cors");
 const path = require("path");
 const { Pool } = require("pg");
 const bcrypt = require("bcrypt");
-require("dotenv").config({ path: path.resolve(__dirname, ".env") });
-// const PORT = process.env.PORT || 5000;
+// require("dotenv").config({ path: path.resolve(__dirname, ".env") });
+require("dotenv").config();
+
+const PORT = process.env.PORT || 5000;
 const app = express();
 
 app.use(cors({
@@ -184,6 +186,7 @@ const nodemailer = require("nodemailer");
 // const resend = new Resend("REMOVED_SECRET");
 let otpStore = {};
 const axios = require("axios");
+const { json } = require("stream/consumers");
 const gmailUser = process.env.GMAIL_USER;
 const gmailAppPassword = process.env.GMAIL_APP_PASSWORD;
 
@@ -351,16 +354,23 @@ app.post("/reset-password", async (req, res) => {
 
 
 // const PORT = process.env.PORT || 5000;
+
 app.get("/", (req,res)=>{
     res.status(200).json({
         message:"Housie Backend Running"
     });
 });
 
-app.listen(5000, () => {
-  console.log("Server running on port 5000");
+app.get("/health", (req,res)=>{
+    res.json({
+        status:"OK"
+    });
 });
 
-// app.listen(PORT, "0.0.0.0", () => {
-//   console.log(`Server running on port ${PORT}`);
+// app.listen(5000, () => {
+//   console.log("Server running on port 5000");
 // });
+
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`Server running on port ${PORT}`);
+});
