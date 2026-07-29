@@ -3,7 +3,7 @@ const cors = require("cors");
 const path = require("path");
 const { Pool } = require("pg");
 const bcrypt = require("bcrypt");
-const axios = require("axios");
+// const axios = require("axios");
 // require("dotenv").config({ path: path.resolve(__dirname, ".env") });
 require("dotenv").config();
 
