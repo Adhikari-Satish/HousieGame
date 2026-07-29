@@ -13,7 +13,7 @@ function Forgot() {
   const [showPassword, setShowPassword] = useState(false)
   const [showPass, setShowPass] = useState(false)
   const [errors, setErrors] = useState({});
-
+  // const [loading,setLoading] = useState(false);
   const BASE_URL =
   window.location.hostname === "localhost"
     ? "http://localhost:5000"
@@ -26,7 +26,8 @@ function Forgot() {
   // ];
   const sendOtp = async () => {
     // for (const url of urls) {
-    setErrors({})
+    // setErrors({})
+    // setLoading(true);
     try {
       const res = await axios.post(`${BASE_URL}/send-otp`,
         // "https://housiegame-production.up.railway.app/send-otp", 
@@ -41,10 +42,10 @@ function Forgot() {
     //   setStep(2);
     } catch (err) {
       // alert(err.response.data.message);
-      setErrors({
-    server: err.response?.data?.message || "Something went wrong"
-  });
-    //  alert(err.response?.data?.message || "Error sending OTP");
+  //     setErrors({
+  //   server: err.response?.data?.message || "Something went wrong"
+  // });
+     alert(err.response?.data?.message || "Error sending OTP");
     }
     // }
   };
@@ -56,7 +57,7 @@ function Forgot() {
   // ];
   const verifyOtp = async () => {
     // for (const url of urls1) {
-    setErrors({})
+    // setErrors({})
     try {
       const res = await axios.post(`${BASE_URL}/verify-otp`,
         // "https://housiegame-production.up.railway.app/verify-otp", 
@@ -69,11 +70,11 @@ function Forgot() {
       setStep(3);
     } catch (err) {
       // alert(err.response.data.message);
-      setErrors({
-    server: err.response?.data?.message || "Invalid OTP"
-  });
+  //     setErrors({
+  //   server: err.response?.data?.message || "Invalid OTP"
+  // });
 
-    //  alert(err.response?.data?.message || "Invalid OTP");
+     alert(err.response?.data?.message || "Invalid OTP");
     }
   // }
   };
@@ -153,7 +154,7 @@ function Forgot() {
           />
           <br /><br />
           <button onClick={sendOtp}>Send OTP</button>
-          <span className="error"> {errors.server}</span>
+          {/* <span className="error"> {errors.server}</span> */}
         </div>
       )}
 
@@ -169,7 +170,7 @@ function Forgot() {
           />
           <br /><br />
           <button onClick={verifyOtp}>Verify OTP</button>
-              <span className="error"> {errors.server}</span>
+              {/* <span className="error"> {errors.server}</span> */}
         </div>
       )}
 
@@ -229,7 +230,7 @@ function Forgot() {
     {showPass ? "🙈" : "👁️"}
   </span>
           <br />
-                    <span className="error">{errors.confirmPassword}</span>
+            <span className="error">{errors.confirmPassword}</span>
           <br />
 
           <button onClick={resetPassword}>Reset Password</button>
