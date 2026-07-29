@@ -219,7 +219,8 @@ app.post("/send-otp", async (req, res) => {
     // console.log("Generated OTP:", otp);
     // const isEmail = login.includes("@");
     // if (isEmail) {
-    try {
+
+    // try {
       await transporter.sendMail({
         from: gmailUser,
         to: dbUser.email,
@@ -273,13 +274,16 @@ app.post("/send-otp", async (req, res) => {
   //       });
   //   }
   // }
-  }
-  catch (err) {
-    console.log(err);
-    res.status(500).json({
-      message: "Server error"
-    });
-  }
+
+
+
+  // }
+  // catch (err) {
+  //   console.log(err);
+  //   res.status(500).json({
+  //     message: "Server error"
+  //   });
+  // }
 });
 
 app.post("/verify-otp", (req, res) => {
