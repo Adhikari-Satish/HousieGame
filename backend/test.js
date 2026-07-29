@@ -232,12 +232,13 @@ app.post("/send-otp", async (req, res) => {
         <h1>${otp}</h1>
         <p>Valid for 5 minutes</p>`
       });
-
-      return res.json({
-        message: "OTP sent to email successfully"
-      });
-    } catch (mailErr) {
-      console.log("Email Error:", mailErr.message);
+      console.log("Email OTP sent")
+      // res.json({
+      //   message: "OTP sent to email successfully"
+      // });
+    }
+    catch (mailErr) {
+      console.log("Email Error:", mailErr);
       return res.status(500).json({
         message: "Failed to send OTP. Check Gmail App Password."
       });
@@ -261,18 +262,23 @@ app.post("/send-otp", async (req, res) => {
           }
         }
       );
-    } 
+      console.log("SMS OTP sent");
+    }
+    
     catch (smsErr) {
       console.log("SMS failed:", smsErr.message);
     }
-  } 
+  res.json({
+  message: "OTP sent successfully"
+  });
+  }
   catch (err) {
     console.log(err);
     res.status(500).json({
       message: "Server error"
     });
   }
-});
+})
 
 app.post("/verify-otp", (req, res) => {
   const { login, otp } = req.body;
