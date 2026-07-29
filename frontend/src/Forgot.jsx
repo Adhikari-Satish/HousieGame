@@ -16,7 +16,7 @@ function Forgot() {
   const BASE_URL =
   window.location.hostname === "localhost"
     ? "http://localhost:5000"
-    : "https://housiegame-production.up.railway.app";
+    : "https://housiegame-61ai.onrender.com";
 
   // STEP 1 - SEND OTP
   // const urls = [
