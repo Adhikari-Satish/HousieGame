@@ -25,7 +25,7 @@ const handleSubmit = async (e) => {
 if (!validate()) return;
   try {
     const response = await axios.post(
-      `https://housiegame-production.up.railway.app/register`,
+      "https://housiegame-production.up.railway.app/register",
       form
     );
 
