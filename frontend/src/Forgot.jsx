@@ -12,7 +12,7 @@ function Forgot() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false)
   const [showPass, setShowPass] = useState(false)
-  const [errors, setErrors] = useState({});
+  // const [errors, setErrors] = useState({});
   // const [loading,setLoading] = useState(false);
   const BASE_URL =
   window.location.hostname === "localhost"
@@ -86,24 +86,24 @@ function Forgot() {
 
   // STEP 3 - RESET PASSWORD
   const resetPassword = async () => {
-    setErrors({})
-    let newErrors = {};
+    // setErrors({})
+    // let newErrors = {};
     // for (const url of urls2) {
     try {
       // Password pattern validation
-      if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?#&]).{8,20}$/.test(
-        newPassword
-      )) 
-      {
-      newErrors.newPassword=
-        "Password must contain uppercase, lowercase, number and special character (8-20 characters)"
-    }
+    //   if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?#&]).{8,20}$/.test(
+    //     newPassword
+    //   )) 
+    //   {
+    //   newErrors.newPassword=
+    //     "Password must contain uppercase, lowercase, number and special character (8-20 characters)"
+    // }
 
       if (newPassword !== confirmPassword) {
-        newErrors.confirmPassword ="Passwords do not match"
+        alert("password do not match")
             
       }
-      setErrors(newErrors);
+      // setErrors(newErrors);
       // Stop API call if validation fails
       
       const res = await axios.post(`${BASE_URL}/reset-password`,
@@ -124,10 +124,10 @@ function Forgot() {
       setConfirmPassword("");
       navigate("/");
     } catch (err) {
-      // alert(err.response.data.message);
-      setErrors({
-      server: err.response?.data?.message || "Error resetting password"
-    });
+      alert(err.response.data.message);
+    //   setErrors({
+    //   server: err.response?.data?.message || "Error resetting password"
+    // });
 
     //  alert(err.response?.data?.message || "Error resetting password");
     }
@@ -199,7 +199,7 @@ function Forgot() {
     {showPassword ? "🙈" : "👁️"}
   </span>
           <br />
-          <span className="error">{errors.newPassword}</span>
+          {/* <span className="error">{errors.newPassword}</span> */}
           <br />
 
           <input
@@ -227,11 +227,11 @@ function Forgot() {
     {showPass ? "🙈" : "👁️"}
   </span>
           <br />
-            <span className="error">{errors.confirmPassword}</span>
+            {/* <span className="error">{errors.confirmPassword}</span> */}
           <br />
 
           <button onClick={resetPassword}>Reset Password</button>
-          <span className="error"> {errors.server}</span>
+          {/* <span className="error"> {errors.server}</span> */}
         </div>
       )}
     </div>
