@@ -11,8 +11,9 @@ const app = express();
 
 app.use(cors({
     origin:[
-      "https://rare-encouragement-production-bd05.up.railway.app",
-        "http://localhost:5173"        
+      // "https://rare-encouragement-production-bd05.up.railway.app",
+        "http://localhost:5173",
+        "https://housiegame-1-yfid.onrender.com"
     ],
     credentials:true
 }
