@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import "./index.css";
 
 function Register() {
@@ -10,8 +11,12 @@ function Register() {
     password: "",
   });
   const [showPassword, setShowPassword] = useState(false)
-
+  const navigate = useNavigate();
   const [errors, setErrors] = useState({});
+  const BASE_URL =
+  window.location.hostname === "localhost"
+    ? "http://localhost:5000"
+    : "https://housiegame-production.up.railway.app";
 
   const handleChange = (e) => {
     setForm({
@@ -19,13 +24,17 @@ function Register() {
       [e.target.name]: e.target.value,
     });
   };
-
+  // const urls = [
+  // `http://localhost:5000/register`,
+  // `https://housiegame-production.up.railway.app/register`
+  // ];
 const handleSubmit = async (e) => {
   e.preventDefault();
-if (!validate()) return;
+  if (!validate()) return;
+  // for (const url of urls) {
   try {
-    const response = await axios.post(
-      "https://housiegame-production.up.railway.app/register",
+    const response = await axios.post(`${BASE_URL}/register`,
+      // "https://housiegame-production.up.railway.app/register",
       form
     );
 
@@ -36,7 +45,7 @@ if (!validate()) return;
       email: "",
       password: "",
     });
-
+    navigate("/");
     setErrors({});
 
   } 
@@ -53,7 +62,8 @@ if (!validate()) return;
   } else {
     alert(error.response?.data?.message || "Something went wrong");
   }
-}
+  // }
+  }
   // catch (error) {
   //   if (error.response && error.response.data.field) {
   //     setErrors((prev) => ({

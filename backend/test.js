@@ -3,7 +3,6 @@ const cors = require("cors");
 const path = require("path");
 const { Pool } = require("pg");
 const bcrypt = require("bcrypt");
-// const axios = require("axios");
 // require("dotenv").config({ path: path.resolve(__dirname, ".env") });
 require("dotenv").config();
 
@@ -13,8 +12,7 @@ const app = express();
 app.use(cors({
     origin:[
       "https://rare-encouragement-production-bd05.up.railway.app",
-        "http://localhost:5173/"
-        
+        "http://localhost:5173"        
     ],
     credentials:true
 }

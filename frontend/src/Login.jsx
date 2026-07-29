@@ -12,6 +12,10 @@ function Login() {
   const [showPassword, setShowPassword] = useState(false)
 
   const [errors, setErrors] = useState({});
+  const BASE_URL =
+  window.location.hostname === "localhost"
+    ? "http://localhost:5000"
+    : "https://housiegame-production.up.railway.app";
 
   const handleChange = (e) => {
     setForm({
@@ -36,24 +40,30 @@ function Login() {
     return Object.keys(newErrors).length === 0;
   };
 // `http://localhost:5000/login`,
+    
+  // const urls = [
+  // `http://localhost:5000/login`,
+  // `https://housiegame-production.up.railway.app/login`
+  // ];
+
   const handleSubmit = async (e) => {
   e.preventDefault();
-if (!validate()) return;
+  if (!validate()) return;
+  // for (const url of urls) {
   try {
-    const response = await axios.post(
-      "https://housiegame-production.up.railway.app/login",
+    const response = await axios.post(`${BASE_URL}/login`,
+      // `http://localhost:5000/login`,
+      // "https://housiegame-production.up.railway.app/login",
       form
     );
-
-    alert(response.data.message);
-
+    // alert(response.data.message);
     console.log(response.data.user);
     navigate("/");
-
   } catch (error) {
     alert(error.response.data.message);
   }
-};
+  // }
+  };
 
 
   return (

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 function Forgot() {
   const [step, setStep] = useState(1);
-const navigate = useNavigate();
+  const navigate = useNavigate();
   const [login, setLogin] = useState(""); // email or phone
   const [email, setEmail] = useState(""); // actual email from backend
   const [otp, setOtp] = useState("");
@@ -13,10 +13,22 @@ const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false)
   const [showPass, setShowPass] = useState(false)
 
+  const BASE_URL =
+  window.location.hostname === "localhost"
+    ? "http://localhost:5000"
+    : "https://housiegame-production.up.railway.app";
+
   // STEP 1 - SEND OTP
+  // const urls = [
+  // `http://localhost:5000/send-otp`,
+  // `https://housiegame-production.up.railway.app/send-otp`
+  // ];
   const sendOtp = async () => {
+    // for (const url of urls) {
     try {
-      const res = await axios.post("https://housiegame-production.up.railway.app/send-otp", {
+      const res = await axios.post(`${BASE_URL}/send-otp`,
+        // "https://housiegame-production.up.railway.app/send-otp", 
+        {
         login,
       });
       
@@ -29,12 +41,20 @@ const navigate = useNavigate();
       alert(err.response.data.message);
     //  alert(err.response?.data?.message || "Error sending OTP");
     }
+    // }
   };
 
   // STEP 2 - VERIFY OTP
+  // const urls1 = [
+  // `http://localhost:5000/verify-otp`,
+  // `https://housiegame-production.up.railway.app/verify-otp`
+  // ];
   const verifyOtp = async () => {
+    // for (const url of urls1) {
     try {
-      const res = await axios.post("https://housiegame-production.up.railway.app/verify-otp", {
+      const res = await axios.post(`${BASE_URL}/verify-otp`,
+        // "https://housiegame-production.up.railway.app/verify-otp", 
+        {
         login,
         otp,
       });
@@ -45,15 +65,24 @@ const navigate = useNavigate();
       alert(err.response.data.message);
     //  alert(err.response?.data?.message || "Invalid OTP");
     }
+  // }
   };
+
+  // const urls2 = [
+  // `http://localhost:5000/reset-password`,
+  // `https://housiegame-production.up.railway.app/reset-password`
+  // ];
 
   // STEP 3 - RESET PASSWORD
   const resetPassword = async () => {
+    // for (const url of urls2) {
     try {
         if (newPassword !== confirmPassword) {
             return alert("Passwords do not match");
         }
-      const res = await axios.post("https://housiegame-production.up.railway.app/reset-password", {
+      const res = await axios.post(`${BASE_URL}/reset-password`,
+        // "https://housiegame-production.up.railway.app/reset-password",
+         {
         login,
         newPassword,
         confirmPassword,
@@ -71,6 +100,7 @@ const navigate = useNavigate();
       alert(err.response.data.message);
     //  alert(err.response?.data?.message || "Error resetting password");
     }
+  // }
   };
 
   return (
