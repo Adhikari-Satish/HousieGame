@@ -4,13 +4,14 @@ const path = require("path");
 const { Pool } = require("pg");
 const bcrypt = require("bcrypt");
 require("dotenv").config({ path: path.resolve(__dirname, ".env") });
-const PORT = process.env.PORT || 5000;
+// const PORT = process.env.PORT || 5000;
 const app = express();
 
 app.use(cors({
     origin:[
-        "http://localhost:5173",
-        "https://rare-encouragement-production-bd05.up.railway.app"
+      "https://rare-encouragement-production-bd05.up.railway.app",
+        "http://localhost:5173"
+        
     ],
     credentials:true
 }
@@ -347,9 +348,7 @@ app.post("/reset-password", async (req, res) => {
 /* =========================
    SERVER START
 ========================= */
-// app.listen(5000, () => {
-//   console.log("Server running on port 5000");
-// });
+
 
 // const PORT = process.env.PORT || 5000;
 app.get("/", (req,res)=>{
@@ -358,6 +357,10 @@ app.get("/", (req,res)=>{
     });
 });
 
-app.listen(PORT, "0.0.0.0", () => {
-  console.log(`Server running on port ${PORT}`);
+app.listen(5000, () => {
+  console.log("Server running on port 5000");
 });
+
+// app.listen(PORT, "0.0.0.0", () => {
+//   console.log(`Server running on port ${PORT}`);
+// });
