@@ -105,9 +105,6 @@ function Forgot() {
       }
       setErrors(newErrors);
       // Stop API call if validation fails
-      if (Object.keys(newErrors).length > 0) {
-         return;
-      }
       
       const res = await axios.post(`${BASE_URL}/reset-password`,
         // "https://housiegame-production.up.railway.app/reset-password",
