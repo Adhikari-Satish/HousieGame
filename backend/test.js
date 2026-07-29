@@ -53,23 +53,16 @@ pool.connect()
 app.post("/register", async (req, res) => {
   try {
     const { username, phone, email, password } = req.body;
-
-   
-    // check if user exists
-    // const checkUser = await pool.query(
-    //   "SELECT * FROM humans WHERE email=$1 OR phone=$2",
-    //   [email, phone]
+    // const userCheck = await pool.query(
+    //   "SELECT * FROM humans WHERE username = $1",
+    //   [username]
     // );
-    const userCheck = await pool.query(
-      "SELECT * FROM humans WHERE username = $1",
-      [username]
-    );
-    if (userCheck.rows.length > 0) {
-      return res.status(400).json({
-        field: "username",
-        message: "Usename already exists"
-      });
-    }
+    // if (userCheck.rows.length > 0) {
+    //   return res.status(400).json({
+    //     field: "username",
+    //     message: "Usename already exists"
+    //   });
+    // }
     const emailCheck = await pool.query(
       "SELECT * FROM humans WHERE email = $1",
       [email]

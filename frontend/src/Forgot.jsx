@@ -12,6 +12,7 @@ function Forgot() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false)
   const [showPass, setShowPass] = useState(false)
+  const [errors, setErrors] = useState({});
 
   const BASE_URL =
   window.location.hostname === "localhost"
@@ -25,6 +26,7 @@ function Forgot() {
   // ];
   const sendOtp = async () => {
     // for (const url of urls) {
+    setErrors({})
     try {
       const res = await axios.post(`${BASE_URL}/send-otp`,
         // "https://housiegame-production.up.railway.app/send-otp", 
@@ -38,7 +40,10 @@ function Forgot() {
     //   alert(res.data.message);
     //   setStep(2);
     } catch (err) {
-      alert(err.response.data.message);
+      // alert(err.response.data.message);
+      setErrors({
+    server: err.response?.data?.message || "Something went wrong"
+  });
     //  alert(err.response?.data?.message || "Error sending OTP");
     }
     // }
@@ -51,6 +56,7 @@ function Forgot() {
   // ];
   const verifyOtp = async () => {
     // for (const url of urls1) {
+    setErrors({})
     try {
       const res = await axios.post(`${BASE_URL}/verify-otp`,
         // "https://housiegame-production.up.railway.app/verify-otp", 
@@ -62,7 +68,11 @@ function Forgot() {
       alert(res.data.message);
       setStep(3);
     } catch (err) {
-      alert(err.response.data.message);
+      // alert(err.response.data.message);
+      setErrors({
+    server: err.response?.data?.message || "Invalid OTP"
+  });
+
     //  alert(err.response?.data?.message || "Invalid OTP");
     }
   // }
@@ -75,11 +85,29 @@ function Forgot() {
 
   // STEP 3 - RESET PASSWORD
   const resetPassword = async () => {
+    setErrors({})
+    let newErrors = {};
     // for (const url of urls2) {
     try {
-        if (newPassword !== confirmPassword) {
-            return alert("Passwords do not match");
-        }
+      // Password pattern validation
+      if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?#&]).{8,20}$/.test(
+        newPassword
+      )) 
+      {
+      newErrors.newPassword=
+        "Password must contain uppercase, lowercase, number and special character (8-20 characters)"
+    }
+
+      if (newPassword !== confirmPassword) {
+        newErrors.confirmPassword ="Passwords do not match"
+            
+      }
+      setErrors(newErrors);
+      // Stop API call if validation fails
+      if (Object.keys(newErrors).length > 0) {
+         return;
+      }
+      
       const res = await axios.post(`${BASE_URL}/reset-password`,
         // "https://housiegame-production.up.railway.app/reset-password",
          {
@@ -94,10 +122,15 @@ function Forgot() {
       setEmail("");
       setOtp("");
       setNewPassword("");
+      setErrors({});
       setConfirmPassword("");
       navigate("/");
     } catch (err) {
-      alert(err.response.data.message);
+      // alert(err.response.data.message);
+      setErrors({
+      server: err.response?.data?.message || "Error resetting password"
+    });
+
     //  alert(err.response?.data?.message || "Error resetting password");
     }
   // }
@@ -120,6 +153,7 @@ function Forgot() {
           />
           <br /><br />
           <button onClick={sendOtp}>Send OTP</button>
+          <span className="error"> {errors.server}</span>
         </div>
       )}
 
@@ -135,6 +169,7 @@ function Forgot() {
           />
           <br /><br />
           <button onClick={verifyOtp}>Verify OTP</button>
+              <span className="error"> {errors.server}</span>
         </div>
       )}
 
@@ -165,7 +200,9 @@ function Forgot() {
   >
     {showPassword ? "🙈" : "👁️"}
   </span>
-          <br /><br />
+          <br />
+          <span className="error">{errors.newPassword}</span>
+          <br />
 
           <input
             className="password"
@@ -191,9 +228,12 @@ function Forgot() {
   >
     {showPass ? "🙈" : "👁️"}
   </span>
-          <br /><br />
+          <br />
+                    <span className="error">{errors.confirmPassword}</span>
+          <br />
 
           <button onClick={resetPassword}>Reset Password</button>
+          <span className="error"> {errors.server}</span>
         </div>
       )}
     </div>
