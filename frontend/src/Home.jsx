@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 
-import image1 from "../assets/image1.png";
-import image2 from "../assets/image2.png";
+import image1 from "./assets/image1.png";
+import image2 from "./assets/image2.png";
 
 
 function Home() {
