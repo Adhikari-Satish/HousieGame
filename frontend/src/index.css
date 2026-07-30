@@ -193,6 +193,19 @@
     color:white;
 }
 
+.startgame{
+display: flex;
+width: 100%;
+ align-items: center;
+  margin-bottom: 10px;
+   justify-Content: space-between;
+}
+.gamesea{
+display: flex;
+ align-items: center;
+  margin-right: 2%;
+}
+
 .primary-btn{
     background:#0b7ecad0;
     color:white;
@@ -204,6 +217,24 @@
     transition:.3s;
 }
 
+.gen{
+  display: flex;
+   justify-content: space-between; 
+   align-items: center; 
+   margin-bottom: 20px
+}
+.gen h3{
+  font-size: 16px;
+   padding-left: 0px;
+}
+.gen button{
+  border: 1px solid #000000;
+   background: #9b9b9b8b;
+    color: #ffffff;
+     padding: 2px 10px;
+      font-size: 15px;
+       border-radius: 7px;
+}
 .primary-btn:hover{
     background:#005eff;
     transform:translateY(-2px);
@@ -307,8 +338,7 @@
 }
 
 /* Responsive */
-@media (max-width:768px){
-
+@media (max-width:750px){
     .home1{
         flex-direction: column;
         gap: 25px;
@@ -329,8 +359,48 @@
         height: 200px;
     }
 }
-/* @media (max-width:600px){
+@media (max-width:590px){
   .home1 h1{
-        font-size: 10px;
+        font-size: 27px;
     }
-} */
+    .startgame{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  .primary-btn{
+    width: calc(100% - 6%);
+    height: 40px;
+    margin: 3%;
+  }
+  .gamesea{
+    width: calc(100% - 6%);
+  }
+  .gamesea input{
+    height: 30px;
+  }
+  .gamesea button{
+    width: 15%;
+    height: 42px;
+    margin-right: -1%;
+  }
+  /* .gen{
+    width: 100%;
+    display: flex;
+    flex-direction:column;
+    gap: 10px;
+  }
+  .gen h3{
+    width: 100%;
+    text-align: left;
+    justify-content: space-between;
+  }
+  .gen h3 button{
+    width: 50%;
+  } */
+  .gensta{
+    display:flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+}

@@ -218,15 +218,17 @@ function Game() {
 
       {/* ---------------- HOME ---------------- */}
       {phase === "home" && (
-        <div style={{ display: "flex", alignItems: "center", marginBottom: "10px" , justifyContent: "space-between"}}>
+        // <div className="startgame" style={{ display: "flex", alignItems: "center", marginBottom: "10px" , justifyContent: "space-between"}}>
+        <div className="startgame">
+
           {/* <button style={{fontSize: "18px", padding: "5px 15px", border: "1px solid #2d2a2a", borderRadius: "7px", cursor: "pointer"}} onClick={startGame}>Start Game</button> */}
           <button className="primary-btn" onClick={startGame}>Start Game</button>
        
-        <div style={{ display: "flex", alignItems: "center", marginRight: "2%"}}>
-
+        {/* <div className="gamesea" style={{ display: "flex", alignItems: "center", marginRight: "2%"}}> */}
+        <div className="gamesea" >
           <input
             type="text"
-            style={{ padding: "5px 7px",fontSize: "18px",border: "1px solid #2d2a2a", marginRight: "0px", borderTopLeftRadius: "7px", borderBottomLeftRadius: "7px" }}
+            style={{ padding: "5px 7px",fontSize: "18px",border: "1px solid #2d2a2a", marginLeft: "5px", borderTopLeftRadius: "7px", borderBottomLeftRadius: "7px", width:"85%"}}
             placeholder="Enter Team Code"
             value={inputCode}
             onChange={(e) => setInputCode(e.target.value)}
@@ -252,11 +254,15 @@ function Game() {
       {/* ---------------- SELECTING ---------------- */}
       {phase === "selecting" && (
         <div>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "20px" }}>
+          {/* <div className="gen" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "20px" }}> */}
+          <div className="gen" >
           {/* <h3>TeamCode: {gameCode}</h3> */}
-          <h3 style={{ fontSize: "16px", paddingLeft: "0px"}}>Team Code : <button style={{ border: "1px solid #000000", background: "#9b9b9b8b", color: "#ffffff", padding: "2px 10px", fontSize: "15px", borderRadius: "7px"}}>{gameCode}</button></h3>
-          <h4 style={{ fontSize: "16px", paddingLeft: "0px"}}>Selected: {selectedNumbers.length}/15</h4>
-          <h3 style={{ fontSize: "16px", paddingLeft: "0px"}}>Time Left: <button style={{ border: "1px solid #000000", background: "#a1a1a1ae", color: "#ffffff", padding: "2px 10px", fontSize: "15px", borderRadius: "7px"}}>{timeLeft}s</button></h3>
+          {/* <h3 style={{ fontSize: "16px", paddingLeft: "0px"}}>Team Code : <button style={{ border: "1px solid #000000", background: "#9b9b9b8b", color: "#ffffff", padding: "2px 10px", fontSize: "15px", borderRadius: "7px"}}>{gameCode}</button></h3>
+          <h3 style={{ fontSize: "16px", paddingLeft: "0px"}}>Selected: {selectedNumbers.length}/15</h3>
+          <h3 style={{ fontSize: "16px", paddingLeft: "0px"}}>Time Left: <button style={{ border: "1px solid #000000", background: "#a1a1a1ae", color: "#ffffff", padding: "2px 10px", fontSize: "15px", borderRadius: "7px"}}>{timeLeft}s</button></h3> */}
+          <h3 >Team Code : <button >{gameCode}</button></h3>
+          <h3 >Selected: {selectedNumbers.length}/15</h3>
+          <h3 >Time Left: <button >{timeLeft}s</button></h3>
           </div>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(10,1fr)", width:"100%", marginBottom: "20px" }}>
             {numbers.map((n) => (
@@ -281,10 +287,10 @@ function Game() {
       {/* ---------------- RUNNING / FINISHED ---------------- */}
       {(phase === "running" || phase === "finished") && (
         <div>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "10px"}}>
+          <div className="gensta" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "10px"}}>
           {/* <h3>Game Code: {gameCode}</h3> */}
           <h3 style={{ fontSize: "18px", padding: "5px 10px", paddingLeft: "0px"}}>Team Code : <button style={{ border: "1px solid #000000", background: "#b5b5b58b", color: "#ffffff", padding: "3px 10px", fontSize: "17px", borderRadius: "7px", marginLeft: "10px" }}>{gameCode}</button></h3>
-          <h3 style={{ fontSize: "18px", padding: "5px 10px", paddingLeft: "0px"}}>Current Number:<button style={{ border: "1px solid #666666", background: "#04ff00", color: "#000000", fontSize: "18px", borderRadius: "50%", marginLeft: "10px", height: "35px", width: "35px" }}>{currentNumber ?? "00"}</button></h3>
+          <h3 style={{ fontSize: "18px", padding: "5px 10px", paddingLeft: "0px"}}>Current Number:<button style={{ border: "1px solid #666666", background: "#04ff00", color: "#000000", fontSize: "23px", borderRadius: "50%", marginLeft: "10px", height: "45px", width: "45px" }}>{currentNumber ?? "00"}</button></h3>
          </div>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(10,1fr)", marginBottom: "20px", width: "100%" }}>
             {numbers.map((n) => (
