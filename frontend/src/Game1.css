@@ -181,3 +181,8 @@
 .stat span{
     font-size:14px;
 }
+@media (max-width:590px){
+    .game-container h1{
+        font-size: 23px;
+    }
+}

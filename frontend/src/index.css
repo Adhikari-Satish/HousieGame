@@ -360,8 +360,8 @@ display: flex;
     }
 }
 @media (max-width:590px){
-  .home1 h1{
-        font-size: 27px;
+  .home h1{
+        font-size: 24px;
     }
     .startgame{
     display: flex;
